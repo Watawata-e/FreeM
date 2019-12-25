@@ -1,0 +1,18 @@
+<h1>大倉忠義</h1>
+<p>app/views/items/index.html.erb</p>
+<p>@testの値は『<%= @test %>』だよ！</p>
+<% if @items.present? %>
+  <table class = "itemlist">
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item %></td>
+          <td><%= item.value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @items %>
+<% else %>
+  <p>出品物がありません</p>
+<% end %>
