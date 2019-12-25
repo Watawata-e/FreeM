@@ -1,6 +1,7 @@
+<% @page_title = "商品検索" %>
 <h1>大倉忠義</h1>
 <p>app/views/items/index.html.erb</p>
-<p>@testの値は『<%= @test %>』だよ！</p>
+<%= link_to "出品する", new_item_path %>
 <% if @items.present? %>
   <table class = "itemlist">
     <tbody>

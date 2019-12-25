@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th><%= form.label :name, "商品名" %></th>
+    <td><%= form.text_field :name, size: 15 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :value, "金額" %></th>
+    <td><%= form.text_field :value, size: 15 %> 円</td>
+  </tr>
+  <tr>
+    <th><%= form.label :status_id, "状態" %></th>
+    <td><%= form.select :status_id, Status.all.map{|s| [s.status, s.id]} %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :category_id, "分類" %></th>
+    <td><%= form.select :category_id, Category.all.map{|c| [c.category, c.id]} %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :stock, "在庫数" %></th>
+    <td><%= form.text_field :stock, size: 15 %> 個</td>
+  <tr>
+    <th><%= form.label :detail, "詳細" %></th>
+    <td><%= form.text_area :detail, cols: 40, rows: 5 %></td>
+  </tr>
+  <div hidden>
+    <%= form.label :user_id, "ユーザ" %>
+    <%= form.text_field :user_id, size: 15 %>
+  </div>
+</table>

@@ -3,6 +3,7 @@ names = %w(Taro Jiro Hana John Mike Sophy Bill Alex Mary Tom)
   User.create(
     name: names[idx],
     loginID: "aaa",
-    password_digest: "pass"
+    password: "pass",
+    password_confirmation: "pass"
   )
 end

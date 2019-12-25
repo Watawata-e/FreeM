@@ -1,0 +1,5 @@
+<h3><%= @page_title = @user.name + "の編集ページ" %></h3>
+<%= form_for @user do |form| %>
+  <%= render "form", form: form %>
+  <div><%= form.submit %></div>
+<% end %>

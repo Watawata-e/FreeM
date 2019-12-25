@@ -17,5 +17,6 @@ module Sosotown
     # the framework and any gems in your application.
 
     config.time_zone = 'Tokyo'
+    config.action_controller.permit_all_parameters = true
   end
 end

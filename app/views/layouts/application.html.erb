@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sosotown</title>
+    <title><%= page_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render "shared/header" %>
+    </header>
+    <main>
+      <% if flash.notice %>
+        <p class = "notice"><%= flash.notice %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
+    <footer>
+      <%= render "shared/footer" %>
+    </footer>
   </body>
 </html>

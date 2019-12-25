@@ -1,2 +1,34 @@
-<h3><%= @item.name %></h3>
+<h3><%= @page_title = @item.name + "の詳細" %></h3>
+<table>
+  <tr>
+    <th>出品者</th>
+    <td><%= link_to User.find(@item.user_id).name, user_path(User.find(@item.user_id)) %> さん</td>
+  <tr>
+    <th>商品名</th>
+    <td><%= @item.name %></td>
+    <th>在庫</th>
+    <td><%= @item.stock %> 個</td>
+  </tr>
+  <tr>
+    <th>金額</th>
+    <td><%= @item.value %> 円</td>
+  </tr>
+  <tr>
+    <th>カテゴリー</th>
+    <td><%= @item.category.category %></td>
+    <th>状態</th>
+    <td><%= @item.status.status %></td>
+  </tr>
+  <tr>
+    <th>詳細</th>
+    <td><%= @item.detail %></td>
+  </tr>
+</table>
 
+<% if current_user %>
+  <% if current_user.id == @item.user_id %>
+    <%= link_to "編集", [:edit, @item] %> | 
+    <%= link_to "削除", @item, method: :delete,
+        data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+<% end %>

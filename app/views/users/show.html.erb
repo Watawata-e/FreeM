@@ -1,0 +1,29 @@
+<% if current_user %>
+  <% if current_user.id == @user.id %>
+    <% @page = "マイページ" %>
+  <% else %>
+    <% @page = "ページ" %>
+  <% end %>
+<% end %>
+<h3><%= @page_name = @user.name + " さんの " + @page %></h3>
+
+<% if current_user %>
+  <% if current_user.id == @user.id %>
+    <p><%= link_to "マイページを編集", [:edit, @user] %> | <%= link_to "退会", "#" %>
+    <ul>
+      <li><%= link_to "お気に入り一覧", "#" %></li>
+      <li><%= link_to "取引一覧", "#" %></li>
+      <li><%= link_to "リクエスト一覧", "#" %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<table>
+  <tr>
+    <th>ユーザー名</th>
+    <td><%= @user.name %></td>
+    <th>プロフィール画像</th>
+    <td>aaa</td>
+  <tr>
+<table>
+<p>出品物一覧</p>
