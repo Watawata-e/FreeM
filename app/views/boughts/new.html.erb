@@ -1,0 +1,9 @@
+<p><%= @test %></p>
+<p>app/view/bought/new.html.erb</p>
+<%= form_for @bought do |form| %>
+  <% options = [] %>
+  <% 1.upto(@item.stock) do |i| %>
+    <% options.push i %>
+  <% end %>
+  個数：<%= form.select :number, options %>
+<% end %>

@@ -30,5 +30,17 @@
     <%= link_to "編集", [:edit, @item] %> | 
     <%= link_to "削除", @item, method: :delete,
         data: { confirm: "本当に削除しますか？" } %>
+  <% else %>
+    <%= form_tag({controller: :boughts, action: :create},{method: :post}) do %>
+      <div>
+        <% @options = [] %>
+        <% 1.upto(@item.stock) do |i| %>
+          <% @options.push i %>
+        <% end %>
+        <%= select_tag 'number', options_for_select(@options) %>
+        <%= hidden_field_tag :item, @item.id %>
+        <input type="submit" value="購入">
+      </div>
+    <% end %>
   <% end %>
 <% end %>
