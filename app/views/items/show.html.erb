@@ -31,16 +31,52 @@
     <%= link_to "削除", @item, method: :delete,
         data: { confirm: "本当に削除しますか？" } %>
   <% else %>
-    <%= form_tag({controller: :boughts, action: :create},{method: :post}) do %>
-      <div>
-        <% @options = [] %>
-        <% 1.upto(@item.stock) do |i| %>
-          <% @options.push i %>
-        <% end %>
-        <%= select_tag 'number', options_for_select(@options) %>
-        <%= hidden_field_tag :item, @item.id %>
-        <input type="submit" value="購入">
-      </div>
+    <% if @item.stock > 0 %>
+      <%= form_tag({controller: :boughts, action: :create},{method: :post}) do %>
+        <div>
+          <% @options = [] %>
+          <% 1.upto(@item.stock) do |i| %>
+            <% @options.push i %>
+          <% end %>
+          <%= select_tag 'number', options_for_select(@options) %>
+          <%= hidden_field_tag :item, @item.id %>
+          <input type="submit" value="購入">
+        </div>
+      <% end %>
+    <% else %>
+      <p>売り切れです。</p>
+      <%= link_to "リクエストする", "#" %>
     <% end %>
+  <% end %>
+<% end %>
+
+<% if @comments.present? %>
+  <table>
+    <tr>
+      <th></th>
+      <th>投稿者</th>
+      <th>コメント</th>
+    </tr>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td></td>
+        <td><%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %></td>
+        <td><%= comment.sentence %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>コメントがありません。</p>
+<% end %>
+
+<% if current_user %>
+  <%= form_tag({controller: :comments, action: :create},{method: :post}) do %>
+    <div>
+      <%= label_tag :コメント %>
+      <%= text_field_tag :sentence %>
+      <%= hidden_field_tag :item_id, @item.id %>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <input type="submit" value="送信">
+    </div>
   <% end %>
 <% end %>

@@ -11,6 +11,9 @@
         <tr>
           <td><%= link_to item.name, item %></td>
           <td><%= item.value %></td>
+          <% if item.stock == 0 %>
+            <td>売り切れ</td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

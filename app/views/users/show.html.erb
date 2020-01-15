@@ -4,6 +4,8 @@
   <% else %>
     <% @page = "ページ" %>
   <% end %>
+<% else %>
+  <% @page = "ページ" %>
 <% end %>
 <h3><%= @page_name = @user.name + " さんの " + @page %></h3>
 
@@ -12,7 +14,7 @@
     <p><%= link_to "マイページを編集", [:edit, @user] %> | <%= link_to "退会", "#" %>
     <ul>
       <li><%= link_to "お気に入り一覧", "#" %></li>
-      <li><%= link_to "取引一覧", "#" %></li>
+      <li><%= link_to "取引一覧", [@user, :boughts] %></li>
       <li><%= link_to "リクエスト一覧", "#" %></li>
     </ul>
   <% end %>
@@ -27,3 +29,19 @@
   <tr>
 <table>
 <p>出品物一覧</p>
+<% if @items.present? %>
+  <table>
+    <tr>
+      <th>商品名</th>
+      <th>金額</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.value %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>出品物はありません</p>
+<% end %>

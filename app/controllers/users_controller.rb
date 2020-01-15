@@ -4,9 +4,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @items = Item.where(user_id: params[:id])
   end
 
   def new
+    @user = User.new
   end
 
   def edit
@@ -16,7 +18,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to @user, notice: "登録しました。"
+      render "login/index", notice: "登録しました。"
     else
       render "new"
     end
