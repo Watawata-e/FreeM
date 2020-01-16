@@ -13,9 +13,9 @@
   <% if current_user.id == @user.id %>
     <p><%= link_to "マイページを編集", [:edit, @user] %> | <%= link_to "退会", "#" %>
     <ul>
-      <li><%= link_to "お気に入り一覧", "#" %></li>
+      <li><%= link_to "お気に入り一覧", [@user, :favorites] %></li>
       <li><%= link_to "取引一覧", [@user, :boughts] %></li>
-      <li><%= link_to "リクエスト一覧", "#" %></li>
+      <li><%= link_to "リクエスト一覧", [@user, :requests] %></li>
     </ul>
   <% end %>
 <% end %>
@@ -34,11 +34,17 @@
     <tr>
       <th>商品名</th>
       <th>金額</th>
+      <th></th>
     </tr>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name %></td>
+        <td><%= link_to item.name, item %></td>
         <td><%= item.value %></td>
+        <td>
+          <% if item.stock < 1 %>
+            <p>売り切れ</p>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

@@ -1,0 +1,25 @@
+<h3><%= @page_title = @user.name + " さんのお気に入り一覧" %></h3>
+<% if @favorites.present? %>
+  <table>
+    <tr>
+      <th>商品名</th>
+      <th>出品者</th>
+      <th></th>
+    </tr>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td>
+          <%= link_to Item.find(favorite.item_id).name, Item.find(favorite.item_id) %>
+        </td>
+        <td>
+          <%= link_to User.find(Item.find(favorite.item_id).user_id).name, User.find(Item.find(favorite.item_id).user_id) %>
+        </td>
+        <% if Item.find(favorite.item_id).stock < 1 %>
+          <td>売り切れ</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>お気に入り登録がありません</p>
+<% end %>

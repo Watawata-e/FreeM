@@ -6,6 +6,7 @@
       <th>出品者</th>
       <th>個数</th>
       <th>合計金額</th>
+      <th>評価</th>
     </tr>
     <% @boughts.each do |bought| %>
       <tr>
@@ -13,6 +14,21 @@
         <td><%= link_to User.find(Item.find(bought.item_id).user_id).name, User.find(Item.find(bought.item_id).user_id) %></td>
         <td><%= bought.number %> 個</td>
         <td><%= bought.number * Item.find(bought.item_id).value %> 円</td>
+        <td>
+          <% if bought.review %>
+            <%= bought.review %>
+          <% else %>
+            <%= form_tag({action: :update, id: bought.id},{method: :patch}) do %>
+              <% @options = [3, 2, 1] %>
+              <%= select_tag 'review', options_for_select(@options) %>
+              <%= hidden_field_tag :number, bought.number %>
+              <%= hidden_field_tag :user_id, bought.user_id %>
+              <%= hidden_field_tag :item_id, bought.item_id %>
+              <%= hidden_field_tag :bought_id, bought.id %>
+              <%= submit_tag "評価する" %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

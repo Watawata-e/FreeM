@@ -4,12 +4,10 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy]
 
   resources :users do
-    resources :items do
-      resources :comments
-      resources :requests
-    end
+    resources :items
     resources :boughts
     resources :favorites
+    resources :requests
   end
 
   resources :items

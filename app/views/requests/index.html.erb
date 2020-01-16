@@ -1,0 +1,20 @@
+<%= @page_title = @user.name + " さんのリクエスト一覧" %>
+<% if @requests.present? %>
+  <table>
+    <tr>
+      <th>商品名</th>
+      <th>出品者</th>
+      <th>個数</th>
+    </tr>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= link_to Item.find(request.item_id).name, Item.find(request.item_id) %></td>
+        <td><%= link_to User.find(Item.find(request.item_id).user_id).name, User.find(Item.find(request.item_id).user_id) %></td>
+        <td><%= request.number %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>リクエストがありません</p>
+<% end %>
+
