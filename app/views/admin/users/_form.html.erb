@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th><%= form.label :name, "ユーザー名" %></th>
+    <td><%= form.text_field :name, size: 15 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :loginID, "ログインID" %></th>
+    <td><%= form.text_field :loginID, size: 15 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :password, "パスワード" %></th>
+    <td><%= form.password_field :password, size: 15 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :password_confirmation, "パスワード確認" %></th>
+    <td><%= form.password_field :password_confirmation, size: 15 %></td>
+  </tr>
+</table>

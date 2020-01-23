@@ -15,7 +15,7 @@
         <td><%= bought.number %> 個</td>
         <td><%= bought.number * Item.find(bought.item_id).value %> 円</td>
         <td>
-          <% if bought.review %>
+          <% if bought.review != 0 %>
             <%= bought.review %>
           <% else %>
             <%= form_tag({action: :update, id: bought.id},{method: :patch}) do %>

@@ -1,0 +1,15 @@
+<p><%= @page_title = "ユーザ一覧" %></p>
+<% if @users.present? %>
+  <table>
+    <tr>
+      <th>ユーザ名</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, [:admin, user] %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>ユーザはいません</p>
+<% end %>

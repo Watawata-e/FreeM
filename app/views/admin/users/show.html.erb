@@ -1,23 +1,8 @@
-<% if current_user %>
-  <% if current_user.id == @user.id %>
-    <% @page = "マイページ" %>
-  <% else %>
-    <% @page = "ページ" %>
-  <% end %>
-<% else %>
-  <% @page = "ページ" %>
-<% end %>
-<h3><%= @page_title = @user.name + " さんの " + @page %></h3>
+<h3><%= @page_title = @user.name + " さんのページ" %></h3>
 
-<% if current_user %>
-  <% if current_user.id == @user.id %>
-    <p><%= link_to "マイページを編集", [:edit, @user] %> | <%= link_to "退会する", @user, method: :delete, data: { confirm: "本当に退会しますか？" } %></p>
-    <ul>
-      <li><%= link_to "お気に入り一覧", [@user, :favorites] %></li>
-      <li><%= link_to "取引一覧", [@user, :boughts] %></li>
-      <li><%= link_to "リクエスト一覧", [@user, :requests] %></li>
-    </ul>
-  <% end %>
+<%= form_tag({ action: :destroy }, { method: :delete }) do %>
+  <%= hidden_field_tag :user_id, @user.id %>
+  <%= submit_tag "#{@user.name} さんを退会させる" %>
 <% end %>
 
 <table>

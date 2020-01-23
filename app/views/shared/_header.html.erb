@@ -7,6 +7,11 @@
       <%= menu_link_to "マイページ", user_path(current_user) %>
       <%= menu_link_to "ログアウト", :session, 
             method: :delete, data: { confirm: "ログアウトしますか？" } %>
+    <% elsif current_admin %>
+      <%= "管理者 " + current_admin.name + " さん" %>
+      <%= menu_link_to "管理者ページ", :admin_root %>
+      <%= menu_link_to "ログアウト", :session,
+            method: :delete, data: { confirm: "ログアウトしますか？" } %>
     <% else %>
       <%= menu_link_to "ログイン", login_index_path %>
       <%= menu_link_to "新規会員登録", new_user_path %>

@@ -77,18 +77,39 @@
   <% end %>
 <% end %>
 
+<% if current_admin %>
+  <%= link_to "商品削除", @item, method: :delete,
+        data: { confirm: "本当に削除しますか？" } %>
+<% end %>
+
 <% if @comments.present? %>
   <table>
     <tr>
-      <th></th>
       <th>投稿者</th>
       <th>コメント</th>
+      <th> </th>
     </tr>
     <% @comments.each do |comment| %>
       <tr>
-        <td></td>
-        <td><%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %></td>
+        <td>
+          <% if User.find_by(id: comment.user_id) %>
+            <%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %>
+          <% else %>
+            退会済
+          <% end %>
+        </td>
         <td><%= comment.sentence %></td>
+        <td>
+          <% if current_user %>
+            <% if current_user.id == @item.user_id %>
+              <%= form_tag({ controller: :comments, action: :destroy }, { method: :delete }) do %>
+                <%= hidden_field_tag :item_id, @item.id %>
+                <%= hidden_field_tag :comment_id, comment.id %>
+                <%= submit_tag "削除" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

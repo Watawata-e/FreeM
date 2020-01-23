@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
-  has_many :comments
-  has_many :favorite
-  has_many :request
-  has_many :bought
+  has_many :comments, dependent: :destroy
+  has_many :favorite, dependent: :destroy
+  has_many :request, dependent: :destroy
+  has_many :bought, dependent: :destroy
 
   belongs_to :user
   belongs_to :status
@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   validates :value, presence: true,
     numericality: {
       only_integer: true,
-      greater_than: 100,
+      greater_than_or_equal_to: 100,
       less_than: 1000000,
       allow_blank: true
     }
@@ -25,6 +25,22 @@ class Item < ApplicationRecord
       allow_blank: true
     }
 
-
+  class << self
+    def search(name, category)
+      rel = order("id")
+      if name.present?
+        if category == "0"
+          rel = rel.where("name LIKE ?", "%#{name}%")
+        else
+          rel = rel.where("name LIKE ? AND category_id LIKE ?", "%#{name}%", "#{category}")
+        end
+      else
+        if category != "0"
+          rel = rel.where("category_id LIKE ?", "#{category}")
+        end
+      end
+      rel
+    end
+  end
 
 end

@@ -9,7 +9,7 @@ class BoughtsController < ApplicationController
   def create
     @item = Item.find(params[:item])
     @number = params[:number]
-    @bought = Bought.new(user_id: current_user.id, item_id: params[:item], number: params[:number])
+    @bought = Bought.new(user_id: current_user.id, item_id: params[:item], number: params[:number], review: 0)
     @item.stock = @item.stock - @number.to_i
     if @bought.save && @item.save
       redirect_to @item, notice: "商品を購入しました。"

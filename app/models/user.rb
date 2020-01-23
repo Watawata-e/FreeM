@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites, dependent: :destroy
   has_many :requests, dependent: :destroy
-  has_many :boughts
+  has_many :boughts, dependent: :destroy
   has_many :items, dependent: :destroy
   
   validates :name, presence: true,

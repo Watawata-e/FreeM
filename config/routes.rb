@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    root "top#index"
+    resources :users
+  end
+
   root "items#index"
 
   resource :session, only: [:create, :destroy]
@@ -10,7 +15,10 @@ Rails.application.routes.draw do
     resources :requests
   end
 
-  resources :items
+  resources :items do
+    get "search", on: :collection
+  end
+
   resources :comments
   resources :requests
   resources :boughts

@@ -1,9 +1,17 @@
 <% @page_title = "商品検索" %>
-<h1>大倉忠義</h1>
-<p>app/views/items/index.html.erb</p>
+
 <% if current_user %>
   <%= link_to "出品する", new_item_path %>
 <% end %>
+
+<%= form_tag :search_items, method: :get, class: "search" do %>
+  <%= text_field_tag "name_q", params[:name_q] %>
+  <% @categories = Category.pluck(:category, :id) %>
+  <% @categories.insert(0, ["選択しない", 0]) %>
+  <%= select_tag "category_q", options_for_select(@categories, params[:category_q]) %>
+  <%= submit_tag "検索" %>
+<% end %> 
+
 <% if @items.present? %>
   <table class = "itemlist">
     <tbody>

@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
+  def search
+    @items = Item.search(params[:name_q], params[:category_q]).page(params[:page]).per(5)
+    render "index"
+  end
+
   def index
-    @test = "てすとだよ"
     @items = Item.order("name").page(params[:page]).per(5)
   end
 
