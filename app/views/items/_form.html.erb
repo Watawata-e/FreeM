@@ -1,5 +1,9 @@
 <table>
   <tr>
+    <th><%= form.label :new_item_picture %></th>
+    <td><%= form.file_field :new_item_picture %></td>
+  </tr>
+  <tr>
     <th><%= form.label :name, "商品名" %></th>
     <td><%= form.text_field :name, size: 15 %></td>
   </tr>

@@ -22,11 +22,15 @@
 
 <table>
   <tr>
-    <th>ユーザー名</th>
+    <td>
+      <% if @user.profile_picture.attached? %>
+        <%= image_tag @user.profile_picture.variant(resize: "100x100") %>
+      <% else %>
+        <%= image_tag "profile.png", size: "100x100" %>
+      <% end %>
+    </td>
     <td><%= @user.name %></td>
-    <th>プロフィール画像</th>
-    <td>aaa</td>
-  <tr>
+  </tr>
 <table>
 <p>評価の平均 
   <% @items = Item.where(user_id: @user.id) %>

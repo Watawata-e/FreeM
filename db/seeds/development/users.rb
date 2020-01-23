@@ -7,3 +7,13 @@ names = %w(Taro Jiro Hana John Mike Sophy Bill Alex Mary Tom)
     password_confirmation: "Pass0"
   )
 end
+
+filename = "profile.png"
+path = Rails.root.join(__dir__, filename)
+
+1.upto(10) do |idx|
+  u = User.find(idx)
+  File.open(path) do |f|
+    u.profile_picture.attach(io: f, filename: filename)
+  end
+end

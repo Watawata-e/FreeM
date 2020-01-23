@@ -1,5 +1,9 @@
 <table>
   <tr>
+    <th><%= form.label :new_profile_picture %></th>
+    <td><%= form.file_field :new_profile_picture %></td>
+  </tr>
+  <tr>
     <th><%= form.label :name, "ユーザー名" %></th>
     <td><%= form.text_field :name, size: 15 %></td>
   </tr>

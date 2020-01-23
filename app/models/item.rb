@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  has_one_attached :item_picture
+  attribute :new_item_picture
+
   has_many :comments, dependent: :destroy
   has_many :favorite, dependent: :destroy
   has_many :request, dependent: :destroy
@@ -40,6 +43,12 @@ class Item < ApplicationRecord
         end
       end
       rel
+    end
+  end
+
+  before_save do
+    if new_item_picture
+      self.item_picture = new_item_picture
     end
   end
 
