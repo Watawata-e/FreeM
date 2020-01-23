@@ -14,6 +14,12 @@ class RequestsController < ApplicationController
     else
       redirect_to :root, notice: "エラーが発生しました。"
     end
+  end
 
+  def destroy
+    @request = Request.find(params[:request_id])
+    @user = User.find(params[:user_id])
+    @request.destroy
+    redirect_to [@user, :requests], notice: "リクエストを削除しました"
   end
 end

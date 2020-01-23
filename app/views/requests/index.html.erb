@@ -5,12 +5,15 @@
       <th>商品名</th>
       <th>出品者</th>
       <th>個数</th>
+      <th></th>
     </tr>
     <% @requests.each do |request| %>
       <tr>
         <td><%= link_to Item.find(request.item_id).name, Item.find(request.item_id) %></td>
         <td><%= link_to User.find(Item.find(request.item_id).user_id).name, User.find(Item.find(request.item_id).user_id) %></td>
         <td><%= request.number %></td>
+        <td>
+        </td>
       </tr>
     <% end %>
   </table>

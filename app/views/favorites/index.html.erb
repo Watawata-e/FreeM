@@ -5,6 +5,7 @@
       <th>商品名</th>
       <th>出品者</th>
       <th></th>
+      <th></th>
     </tr>
     <% @favorites.each do |favorite| %>
       <tr>
@@ -13,6 +14,8 @@
         </td>
         <td>
           <%= link_to User.find(Item.find(favorite.item_id).user_id).name, User.find(Item.find(favorite.item_id).user_id) %>
+        </td>
+        <td>
         </td>
         <% if Item.find(favorite.item_id).stock < 1 %>
           <td>売り切れ</td>
