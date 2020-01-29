@@ -35,11 +35,11 @@ class Item < ApplicationRecord
         if category == "0"
           rel = rel.where("name LIKE ?", "%#{name}%")
         else
-          rel = rel.where("name LIKE ? AND category_id LIKE ?", "%#{name}%", "#{category}")
+          rel = rel.where("name LIKE ? AND category_id = ?", "%#{name}%", category)
         end
       else
         if category != "0"
-          rel = rel.where("category_id LIKE ?", "#{category}")
+          rel = rel.where("category_id = ?", category)
         end
       end
       rel
