@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @comments = Comment.where(user_id: params[:id]).where.not(administrator_id: nil)
     @user = User.find(params[:id])
     @items = Item.where(user_id: params[:id])
   end

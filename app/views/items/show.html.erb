@@ -28,7 +28,13 @@
   </tr>
   <tr>
     <th>出品者</th>
-    <td><%= link_to User.find(@item.user_id).name, user_path(User.find(@item.user_id)) %> さん</td>
+    <td>
+      <% if current_admin %>
+        <%= link_to User.find(@item.user_id).name, admin_user_path(User.find(@item.user_id)) %> さん
+      <% else %>
+        <%= link_to User.find(@item.user_id).name, user_path(User.find(@item.user_id)) %> さん
+      <% end %>
+    </td>
   <tr>
     <th>商品名</th>
     <td><%= @item.name %></td>

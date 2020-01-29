@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
   def search
-    @items = Item.search(params[:name_q], params[:category_q]).page(params[:page]).per(5)
+    @items = Item.search(params[:name_q], params[:category_q]).page(params[:page]).per(10)
     render "index"
   end
 
   def index
-    @items = Item.order("name").page(params[:page]).per(5)
+    @items = Item.order("name").page(params[:page]).per(10)
   end
 
   def show

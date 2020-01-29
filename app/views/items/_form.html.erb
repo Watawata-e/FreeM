@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <th><%= form.label :new_item_picture %></th>
+    <th><%= form.label :new_item_picture, "商品画像" %></th>
     <td><%= form.file_field :new_item_picture %></td>
   </tr>
   <tr>
@@ -24,7 +24,7 @@
     <td><%= form.text_field :stock, size: 15 %> 個</td>
   <tr>
     <th><%= form.label :detail, "詳細" %></th>
-    <td><%= form.text_area :detail, cols: 40, rows: 5 %></td>
+    <td><%= form.text_area :detail, cols: 30, rows: 5 %></td>
   </tr>
   <div hidden>
     <%= form.label :user_id, "ユーザ" %>

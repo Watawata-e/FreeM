@@ -1,31 +1,50 @@
 <% @page_title = "商品検索" %>
 
 <% if current_user %>
-  <%= link_to "出品する", new_item_path %>
+  <div id = "create"><%= link_to "出品する", new_item_path %></div>
 <% end %>
 
-<%= form_tag :search_items, method: :get, class: "search" do %>
-  <%= text_field_tag "name_q", params[:name_q] %>
-  <% @categories = Category.pluck(:category, :id) %>
-  <% @categories.insert(0, ["選択しない", 0]) %>
-  <%= select_tag "category_q", options_for_select(@categories, params[:category_q]) %>
-  <%= submit_tag "検索" %>
-<% end %> 
+<div id = "search">
+  <table>
+    <tr>
+      <th>キーワード</th>
+      <th>カテゴリー</th>
+      <th></th>
+    </tr>
+    <tr>
+      <%= form_tag :search_items, method: :get, class: "search" do %>
+        <td><%= text_field_tag "name_q", params[:name_q] %></td>
+        <% @categories = Category.pluck(:category, :id) %>
+        <% @categories.insert(0, ["選択しない", 0]) %>
+        <td><%= select_tag "category_q", options_for_select(@categories, params[:category_q]) %></td>
+        <td><%= submit_tag "検索" %></td>
+      <% end %> 
+    </tr>
+  </table>
+</div>
 
 <% if @items.present? %>
-  <table class = "itemlist">
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= link_to item.name, item %></td>
-          <td><%= item.value %></td>
-          <% if item.stock == 0 %>
-            <td>売り切れ</td>
+  <div class = "itemlist">
+    <% @items.each do |item| %>
+      <div class = "item">
+        <ul>
+          <li id = "itempicture">
+            <% if item.item_picture.attached? %>
+              <%= image_tag item.item_picture.variant(resize: "100x100") %>
+            <% else %>
+              <%= image_tag "item.png", size: "100x100" %>
+            <% end %>
+          </li>
+          <li><%= link_to item.name, item %></li>
+          <% if item.stock > 0 %>
+            <li><%= item.value %> 円</li>
+          <% else %>
+            <li>売り切れ</li>
           <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </ul>
+      </div>
+    <% end %>
+  </div>
   <%= paginate @items %>
 <% else %>
   <p>出品物がありません</p>

@@ -13,3 +13,100 @@
  *= require_tree .
  *= require_self
  */
+
+/* ページ全体 */
+body {
+  background-color: #ccfbcc;
+  color: #191970;
+  margin: 20px 40px;
+}
+
+/* リンク */
+a:link {
+  color: #006e54;
+  text-decoration: none;
+}
+a:visited { 
+  color: #006e54;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: dotted 5px #aaa;
+}
+
+/* メニューバー */
+nav.menubar ul li {
+  display: inline;
+  margin-right: 5px;
+}
+nav.menubar {
+  background-color: #dddddd;
+  color: #555555;
+  padding: 1px;
+}
+nav.menubar ul li a {
+  text-decoration: none;
+  color: #000000;
+}
+nav.menubar ul li a:hover {
+  border-bottom: dotted 10px #fff;
+}
+
+/* サーチ */
+#search {
+  margin: 10px;
+}
+
+/* アイテム一覧 */
+.itemlist {
+  margin: 10px 20px;
+}
+.item {
+  display: inline-block;
+}
+.item ul {
+  padding: 0.5em 1em;
+  margin: 1em 0.2em;
+  color: #191970;
+  background-color: #d0ffd0;
+  border-bottom: solid 6px #bfeebf;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  list-style: none;
+}
+.item ul li {
+  margin: 0;
+  padding: 0;
+  border-bottom: dotted 2px #bbbbbb;
+}
+#itempicture {
+  height: 100px;
+  width: 100px;
+}
+
+/* フッター */
+#footer {
+  text-align: center;
+  background-color: #dddddd;
+  height: 50px;
+}
+
+/* マイページ用 */
+.aikon ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+/* 出品ボタン */
+#create {
+  padding: 0.5em 1em;
+  margin: 1em 0.2em;
+  color: #191970;
+  background-color: #d0ffd0;
+  border-bottom: solid 6px #bfeebf;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  width: 100px;
+  text-align: center;
+}
+

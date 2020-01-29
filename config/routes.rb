@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "top#index"
     resources :users
+    resources :comments
   end
 
   root "items#index"

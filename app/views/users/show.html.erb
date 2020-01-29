@@ -12,67 +12,83 @@
 <% if current_user %>
   <% if current_user.id == @user.id %>
     <p><%= link_to "マイページを編集", [:edit, @user] %> | <%= link_to "退会する", @user, method: :delete, data: { confirm: "本当に退会しますか？" } %></p>
-    <ul>
-      <li><%= link_to "お気に入り一覧", [@user, :favorites] %></li>
-      <li><%= link_to "取引一覧", [@user, :boughts] %></li>
-      <li><%= link_to "リクエスト一覧", [@user, :requests] %></li>
-    </ul>
+    <p><%= link_to "お気に入り一覧", [@user, :favorites] %> | <%= link_to "取引一覧", [@user, :boughts] %> | <%= link_to "リクエスト一覧", [@user, :requests] %></p>
+    <div id = "create"><%= link_to "出品する", new_item_path %></div>
   <% end %>
 <% end %>
 
-<table>
-  <tr>
-    <td>
+<div class = "aikon">
+  <ul>
+    <li>
       <% if @user.profile_picture.attached? %>
         <%= image_tag @user.profile_picture.variant(resize: "100x100") %>
       <% else %>
         <%= image_tag "profile.png", size: "100x100" %>
       <% end %>
-    </td>
-    <td><%= @user.name %></td>
-  </tr>
-<table>
-<p>評価の平均 
-  <% @items = Item.where(user_id: @user.id) %>
-  <% ave = 0.0 %>
-  <% i = 0.0 %>
-  <% if @items.present? %>
-    <% @boughts = Bought.where(item_id: @items) %>
-    <% if @boughts.present? %>
-      <% @boughts.each do |bought| %>
-        <% if bought.review > 0 %>
-          <% ave += bought.review %>
-          <% i += 1 %>
+    </li>
+    <li><%= @user.name %></li>
+    <li>評価の平均 
+      <% @items = Item.where(user_id: @user.id) %>
+      <% ave = 0.0 %>
+      <% i = 0.0 %>
+      <% if @items.present? %>
+        <% @boughts = Bought.where(item_id: @items) %>
+        <% if @boughts.present? %>
+          <% @boughts.each do |bought| %>
+            <% if bought.review > 0 %>
+              <% ave += bought.review %>
+              <% i += 1 %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  <% end %>
-  <% if i == 0 %>
-    <%= 0 %>
-  <% else %>
-    <%= (ave / i).round(2) %>
-  <% end %>
-</p>
-<p>出品物一覧</p>
-<% if @items.present? %>
+      <% if i == 0 %>
+        <%= 0 %>
+      <% else %>
+        <%= (ave / i).round(2) %>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<% if current_user %>
   <table>
     <tr>
-      <th>商品名</th>
-      <th>金額</th>
-      <th></th>
+      <th>管理者からのメッセージ</th>
     </tr>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name, item %></td>
-        <td><%= item.value %></td>
-        <td>
-          <% if item.stock < 1 %>
-            <p>売り切れ</p>
-          <% end %>
-        </td>
-      </tr>
+    <% if @comments.present? %>
+      <% @comments.each do |comment| %>
+        <tr><td><%= comment.sentence %></td></tr>
+      <% end %>
+    <% else %>
+      <tr><td>メッセージはありません。</td></tr>
     <% end %>
   </table>
+<% end %>
+
+<p>出品物一覧</p>
+<% if @items.present? %>
+  <div class = "itemlist">
+    <% @items.each do |item| %>
+      <div class = "item">
+        <ul>
+          <li id = "itempicture">
+            <% if item.item_picture.attached? %>
+              <%= image_tag item.item_picture.variant(resize: "100x100") %>
+            <% else %>
+              <%= image_tag "item.png", size: "100x100" %>
+            <% end %>
+          </li>
+          <li><%= link_to item.name, item %></li>
+          <% if item.stock > 0 %>
+            <li><%= item.value %> 円</li>
+          <% else %>
+            <li>売り切れ</li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <p>出品物はありません</p>
 <% end %>

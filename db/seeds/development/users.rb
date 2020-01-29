@@ -1,5 +1,5 @@
-names = %w(Taro Jiro Hana John Mike Sophy Bill Alex Mary Tom)
-0.upto(9) do |idx|
+names = %w(Taro Jiro Hana John Mike)
+0.upto(4) do |idx|
   User.create(
     name: names[idx],
     loginID: names[idx] + "id",
@@ -8,10 +8,9 @@ names = %w(Taro Jiro Hana John Mike Sophy Bill Alex Mary Tom)
   )
 end
 
-filename = "profile.png"
-path = Rails.root.join(__dir__, filename)
-
-1.upto(10) do |idx|
+1.upto(5) do |idx|
+  filename = "#{idx}.png"
+  path = Rails.root.join(__dir__, filename)
   u = User.find(idx)
   File.open(path) do |f|
     u.profile_picture.attach(io: f, filename: filename)

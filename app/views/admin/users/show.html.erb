@@ -39,26 +39,55 @@
     <%= (ave / i).round(2) %>
   <% end %>
 </p>
+
+<table>
+  <tr>
+    <th>管理者からのメッセージ</th>   
+  </tr>
+  <tr>
+    <td>
+      <%= form_tag(comments_path, method: :post) do %>
+        <div>
+          <%= text_field_tag :sentence %>
+          <%= hidden_field_tag :admin_id, current_admin.id %>
+          <%= hidden_field_tag :user_id, params[:id] %>
+          <%= submit_tag "送信" %>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+  <% if @comments.present? %>
+    <% @comments.each do |comment| %>
+      <tr><td><%= comment.sentence %></td></tr>
+    <% end %>
+  <% else %>
+    <tr><td>メッセージはありません。</td></tr>
+  <% end %>
+</table>
+
 <p>出品物一覧</p>
 <% if @items.present? %>
-  <table>
-    <tr>
-      <th>商品名</th>
-      <th>金額</th>
-      <th></th>
-    </tr>
+  <div class = "itemlist">
     <% @items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name, item %></td>
-        <td><%= item.value %></td>
-        <td>
-          <% if item.stock < 1 %>
-            <p>売り切れ</p>
+      <div class = "item">
+        <ul>
+          <li id = "itempicture">
+            <% if item.item_picture.attached? %>
+              <%= image_tag item.item_picture.variant(resize: "100x100") %>
+            <% else %>
+              <%= image_tag "item.png", size: "100x100" %>
+            <% end %>
+          </li>
+          <li><%= link_to item.name, item %></li>
+          <% if item.stock > 0 %>
+            <li><%= item.value %> 円</li>
+          <% else %>
+            <li>売り切れ</li>
           <% end %>
-        </td>
-      </tr>
+        </ul>
+      </div>
     <% end %>
-  </table>
+  </div>
 <% else %>
   <p>出品物はありません</p>
 <% end %>
