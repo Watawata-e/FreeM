@@ -98,25 +98,49 @@
 <% end %>
 
 <% if @comments.present? %>
-  <table>
-    <tr>
-      <th>投稿者</th>
-      <th>コメント</th>
-      <th> </th>
-    </tr>
+  <table id = "comment">
     <% @comments.each do |comment| %>
       <tr>
         <td>
-          <% if User.find_by(id: comment.user_id) %>
-            <%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %>
-          <% else %>
-            退会済
+          <% if comment.user_id == @item.user_id %>
+            <% if User.find(comment.user_id).profile_picture.attached? %>
+              <%= image_tag User.find(comment.user_id).profile_picture.variant(resize: "25x25") %>
+            <% else %>
+              <%= image_tag "profile.png", size: "25x25" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if comment.user_id == @item.user_id %>
+            <% if User.find_by(id: comment.user_id) %>
+              <%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %>
+            <% else %>
+              退会済
+            <% end %>
           <% end %>
         </td>
         <td><%= comment.sentence %></td>
         <td>
-          <% if current_user %>
-            <% if current_user.id == @item.user_id %>
+          <% if comment.user_id != @item.user_id %>
+            <% if User.find_by(id: comment.user_id) %>
+              <%= link_to User.find(comment.user_id).name, User.find(comment.user_id) %>
+            <% else %>
+              退会済
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if comment.user_id != @item.user_id %>
+            <% if User.find(comment.user_id).profile_picture.attached? %>
+              <%= image_tag User.find(comment.user_id).profile_picture.variant(resize: "25x25") %>
+            <% else %>
+              <%= image_tag "profile.png", size: "25x25" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if current_user || current_admin %>
+            <% if current_admin || current_user.id == @item.user_id %>
               <%= form_tag({ controller: :comments, action: :destroy }, { method: :delete }) do %>
                 <%= hidden_field_tag :item_id, @item.id %>
                 <%= hidden_field_tag :comment_id, comment.id %>

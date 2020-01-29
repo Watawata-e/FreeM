@@ -78,6 +78,7 @@ nav.menubar ul li a:hover {
   margin: 0;
   padding: 0;
   border-bottom: dotted 2px #bbbbbb;
+  width: 100px;
 }
 #itempicture {
   height: 100px;
@@ -110,3 +111,9 @@ nav.menubar ul li a:hover {
   text-align: center;
 }
 
+/* コメント欄 */
+#comment {
+  background-color: #eeeeee;
+  margin: 1em;
+  padding: 0.5em;
+}

@@ -5,15 +5,15 @@
   </tr>
   <tr>
     <th><%= form.label :name, "ユーザー名" %></th>
-    <td><%= form.text_field :name, size: 15 %></td>
+    <td><%= form.text_field :name, size: 15 %>・10字以内</td>
   </tr>
   <tr>
     <th><%= form.label :loginID, "ログインID" %></th>
-    <td><%= form.text_field :loginID, size: 15 %></td>
+    <td><%= form.text_field :loginID, size: 15 %>・数英10字以内、かつ1字目は英</td>
   </tr>
   <tr>
     <th><%= form.label :password, "パスワード" %></th>
-    <td><%= form.password_field :password, size: 15 %></td>
+    <td><%= form.password_field :password, size: 15 %>・数大小英使用10字以内</td>
   </tr>
   <tr>
     <th><%= form.label :password_confirmation, "パスワード確認" %></th>

@@ -10,12 +10,12 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   
   validates :name, presence: true,
-    length: { minimum: 2, maximum: 10, allow_blank: true },
+    length: { minimum: 1, maximum: 10, allow_blank: true },
     uniqueness: { case_sensitive: false}
 
   validates :loginID, presence: true,
     format: { with: /\A[A-Za-z][A-Za-z0-9]*\z/, allow_blank: true },
-    length: { minimum: 2, maximum: 10, allow_blank: true },
+    length: { minimum: 1, maximum: 10, allow_blank: true },
     uniqueness: { case_sensitive: false }
   
   validates :password, presence: true,
