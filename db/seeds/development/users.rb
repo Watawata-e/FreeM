@@ -10,7 +10,7 @@ end
 
 1.upto(5) do |idx|
   filename = "#{idx}.png"
-  path = Rails.root.join(__dir__, filename)
+  path = Rails.root.join("db/seeds/development/#{idx}.png")
   u = User.find(idx)
   File.open(path) do |f|
     u.profile_picture.attach(io: f, filename: filename)
