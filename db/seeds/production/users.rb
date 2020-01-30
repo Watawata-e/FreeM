@@ -9,7 +9,7 @@ names = %w(Taro Jiro Hana John Mike)
 end
 
 1.upto(5) do |idx|
-  filename = "#{idx}.png"
+  filename = "#{idx}.jpeg"
   path = File.expand_path("#{filename}", __dir__)
   u = User.find(idx)
   File.open(path) do |f|

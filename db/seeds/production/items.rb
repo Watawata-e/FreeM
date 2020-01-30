@@ -18,7 +18,7 @@ stock = %w(13 42 3 12 4 55 62 24 9 31 53 15 4)
 end
 
 1.upto(13) do |idx|
-  filename = "#{idx}a.png"
+  filename = "#{idx}a.jpeg"
   path = File.expand_path("#{filename}", __dir__)
   i = Item.find(idx)
   File.open(path) do |f|
