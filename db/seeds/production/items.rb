@@ -19,7 +19,7 @@ end
 
 1.upto(13) do |idx|
   filename = "#{idx}a.png"
-  path = Rails.root.join("db/seeds/development/#{idx}a.png")
+  path = File.expand_path("#{filename}", __dir__)
   i = Item.find(idx)
   File.open(path) do |f|
     i.item_picture.attach(io: f, filename: filename)
